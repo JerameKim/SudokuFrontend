@@ -50,6 +50,7 @@ export default {
         result: true,
         difficulty: "Very Easy",
         levels: ["Very Easy", "Medium", "Nearly Impossible"],
+        url: "https://tranquil-fortress-39668.herokuapp.com"
       }
     }, 
     mounted() {  // When app loads, make a puzzle
@@ -71,7 +72,7 @@ export default {
       grabPuzzle(difficulty){ // fetch request and format puzzle 
         this.showResult = false  // Every time we need a new puzzle, hide the solution 
         if(difficulty == "Very Easy") {
-          fetch("http://127.0.0.1:5000/puzzle")
+          fetch(this.url + "/puzzle")
           .then(response => response.json())
           .then( data => 
           { 
@@ -90,7 +91,7 @@ export default {
           })
         }
         if(difficulty == "Medium") {
-          fetch("http://127.0.0.1:5000/puzzle2")
+          fetch(this.url + "/puzzle2")
           .then(response => response.json())
           .then( data => 
           { 
@@ -109,7 +110,7 @@ export default {
           })
         }
         if(difficulty == "Nearly Impossible") {
-          fetch("http://127.0.0.1:5000/puzzle3")
+          fetch(this.url + "/puzzle3")
           .then(response => response.json())
           .then( data => 
           { 
@@ -174,7 +175,7 @@ export default {
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({values: board_total})
             }; 
-            fetch("http://127.0.0.1:5000/puzzle", requestOptions)
+            fetch(this.url + "/puzzle", requestOptions)
                 .then(response => response.json())
                 .then(data => {
                   this.solutionAlert(data)
